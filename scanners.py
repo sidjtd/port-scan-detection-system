@@ -16,8 +16,10 @@ empty = []
 # prints out all lines in file
 with fd as reader :
   for line in reader :
-    all_split_stored.append(line.split())
-    total_scans += 1
+    split_up = line.split()
+    if(len(split_up) > 0):
+      all_split_stored.append(split_up)
+      total_scans += 1
 
 # now that each line is a list within a super list, organize all Addresses
 all_origins = []
@@ -32,6 +34,7 @@ for unique_arrs in all_split_stored :
 
 all_origins = list(set(all_origins))
 all_destination = list(set(all_destination))
+
 
 # print('[scan attempts] ', total_scans)
 
