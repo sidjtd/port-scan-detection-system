@@ -19,13 +19,24 @@ with fd as reader :
 
 # now that each line is a list within a super list, organize all Addresses
 all_origins = []
-all_destinations = []
+all_destination = []
 
 # This may be more effecient?
 # new_list = list(set(my_list))
 
 for unique_arrs in all_split_stored :
   all_origins.append(unique_arrs[2])
-  all_destinations.append(unique_arrs[4])
+  all_destination.append(unique_arrs[4])
 
-print(all_origins)
+all_origins = list(set(all_origins))
+all_destination = list(set(all_destination))
+
+print('[scan attempts] ', total_scans, '\n')
+
+print('\n [scan origin hosts] ',)
+for each in all_origins:
+  print(each)
+
+print('\n[scan destination hosts] ', '\n')
+for each in all_destination:
+  print(each)
