@@ -20,7 +20,7 @@ We need you to take the following steps so that we can continue to ensure peace 
     - Displays a count of how many scan events occurred in the logs
     - Displays a list of all host ip addresses where the scans originated from
     - Displays a list of all host ip addresses where the scans were performed against
-1. Your final report should include the `scanners.py` and `scanners.txt` files, as well as a summary of any new facts you discovered in your analysis and the procedures you took to complete the challenge.
+1. Your final report should include the `scanners.py` and `scanners_found.txt` files, as well as a summary of any new facts you discovered in your analysis and the procedures you took to complete the challenge.
 1. If you could also make some recommendations to keep our network secure we will be able to sleep at night.
 1. Provide us with the necessary report documents in a zip archive when completed.
 
