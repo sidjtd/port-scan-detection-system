@@ -11,6 +11,8 @@ total_scans = 0;
 
 all_split_stored = []
 
+empty = []
+
 # prints out all lines in file
 with fd as reader :
   for line in reader :
@@ -31,12 +33,12 @@ for unique_arrs in all_split_stored :
 all_origins = list(set(all_origins))
 all_destination = list(set(all_destination))
 
-print('[scan attempts] ', total_scans, '\n')
+# print('[scan attempts] ', total_scans)
 
-print('\n [scan origin hosts] ',)
-for each in all_origins:
-  print(each)
+# print('\n[scan origin hosts] ',)
+# for each in all_origins:
+#   print(each)
 
-print('\n[scan destination hosts] ', '\n')
-for each in all_destination:
-  print(each)
+# print('\n[scan destination hosts] ')
+# for each in all_destination:
+#   print(each)
