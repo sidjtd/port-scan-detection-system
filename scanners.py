@@ -10,6 +10,7 @@ fd = open(filePath, 'r')
 total_scans = 0;
 
 all_split_stored = []
+master_obj = {}
 
 # prints out all lines in file
 with fd as reader :
@@ -18,6 +19,8 @@ with fd as reader :
     if(len(split_up) > 0):
       all_split_stored.append(split_up)
       total_scans += 1
+
+
 
 # now that each line is a list within a super list, organize all Addresses
 all_origins = []
@@ -31,12 +34,30 @@ for unique_arrs in all_split_stored :
 all_origins = list(set(all_origins))
 all_destination = list(set(all_destination))
 
-print('[scan attempts] ', total_scans)
+# prepare write_file (ensure it initializes blank)
+reset_file = open('scanners_found.txt', 'w')
+reset_file.write('FOUND SCANNERS\n')
+reset_file.close()
 
-print('\n[scan origin hosts] ',)
+# prepare file to be appended by results
+append_file = open('scanners_found.txt', 'a')
+append_file.write('\n[scan attempts] ' + str(total_scans) + '\n')
+# print('[scan attempts] ', total_scans)
+
+append_file.write('\n[scan origin hosts]\n')
 for each in all_origins:
-  print(each)
+  append_file.write(each + '\n')
+# print('\n[scan origin hosts] ',)
+#   print(each)
 
-print('\n[scan destination hosts] ')
+append_file.write('\n[scan destination hosts]\n')
 for each in all_destination:
-  print(each)
+  append_file.write(each + '\n')
+# print('\n[scan destination hosts] ')
+# for each in all_destination:
+#   print(each)
+
+
+append_file.close()
+
+
