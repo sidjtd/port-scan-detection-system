@@ -3,20 +3,10 @@ import os
 import re
 import copy
 
-all_scans = []
 all_destination = []
 all_origins = []
+all_scans = []
 master_obj = {}
-
-def biggest_value(dic):
-  hold = 0;
-  biggest = '';
-  for each in dic:
-    if(dic[each] > hold):
-      hold = dic[each]
-      biggest = each
-  return biggest
-
 
 # prints out all lines in text file
 fd = open("./ssh.log.txt", 'r')
@@ -39,6 +29,17 @@ with fd as reader :
       all_origins.append(line[2])
       all_destination.append(line[4])
 
+#  ------------------------------ Extra Experimental Stuff ------------------------------
+#  ------------------------------ Extra Experimental Stuff ------------------------------
+def biggest_value(dic):
+  hold = 0;
+  biggest = '';
+  for each in dic:
+    if(dic[each] > hold):
+      hold = dic[each]
+      biggest = each
+  return biggest
+
 total_access_attempts = copy.deepcopy(master_obj)
 unique_dest = copy.deepcopy(master_obj)
 unique_totals = copy.deepcopy(unique_dest)
@@ -46,6 +47,7 @@ unique_totals = copy.deepcopy(unique_dest)
 # create dictionary tracking total hits, each unique destination, total of unique hits
 for each in total_access_attempts:
   total_access_attempts[each] = len(total_access_attempts[each])
+  # total_access_attempts[each] = len(total_access_attempts[each])
 for each in unique_dest:
   unique_dest[each] = list(set(unique_dest[each]))
 for each in unique_totals:
@@ -54,6 +56,8 @@ for each in unique_totals:
 # dedupe values in both
 all_origins = list(set(all_origins))
 all_destination = list(set(all_destination))
+#  ------------------------------ Extra Experimental Stuff ------------------------------
+#  ------------------------------ Extra Experimental Stuff ------------------------------
 
 # prepare write_file (ensure it initializes blank)
 new_file = open('scanners_found.txt', 'w')
@@ -64,17 +68,15 @@ new_file.close()
 file = open('scanners_found.txt', 'a')
 file.write('\n[scan attempts] ' + str(len(all_scans)) + '\n\n[scan origin hosts]\n')
 
-for each in all_origins:
-  file.write(each + '\n')
+for el in all_origins:
+  file.write(el + '\n')
 
 file.write('\n[scan destination hosts]\n')
-for each in all_destination:
-  file.write(each + '\n')
+for el in all_destination:
+  file.write(el + '\n')
 
 most_accesses = biggest_value(total_access_attempts)
-print(unique_totals)
-
 file.write('\nCONCLUSION\n\nAddress: ' + most_accesses + ' has attempted the most number accesses, a total of ' + str(total_access_attempts[most_accesses]) + ' accesses.\n')
-
 file.close()
 
+print(total_access_attempts)
