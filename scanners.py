@@ -3,16 +3,19 @@ import os
 import re
 import copy
 
-all_split_stored = []
+all_scans = []
 all_destination = []
 all_origins = []
 master_obj = {}
 
 def biggest_value(dic):
   hold = 0;
+  biggest = '';
   for each in dic:
-    if(each > hold):
-      hold = each
+    if(dic[each] > hold):
+      hold = dic[each]
+      biggest = each
+  return biggest
 
 
 # prints out all lines in text file
@@ -32,7 +35,7 @@ with fd as reader :
         master_obj[orig_as_key] = [line[4]]
 
       # prepare to create duplicate free list using following
-      all_split_stored.append(line)
+      all_scans.append(line)
       all_origins.append(line[2])
       all_destination.append(line[4])
 
@@ -59,7 +62,7 @@ new_file.close()
 
 # prepare file to be appended by results
 file = open('scanners_found.txt', 'a')
-file.write('\n[scan attempts] ' + str(len(all_split_stored )) + '\n\n[scan origin hosts]\n')
+file.write('\n[scan attempts] ' + str(len(all_scans)) + '\n\n[scan origin hosts]\n')
 
 for each in all_origins:
   file.write(each + '\n')
@@ -68,9 +71,10 @@ file.write('\n[scan destination hosts]\n')
 for each in all_destination:
   file.write(each + '\n')
 
-file.write('\nCONCLUSION\n')
-file.write('\nIt appears that \n')
+most_accesses = biggest_value(total_access_attempts)
+print(unique_totals)
+
+file.write('\nCONCLUSION\n\nAddress: ' + most_accesses + ' has attempted the most number accesses, a total of ' + str(total_access_attempts[most_accesses]) + ' accesses.\n')
 
 file.close()
-
 
